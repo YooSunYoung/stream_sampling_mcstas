@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "StreamSampling"
+version = "26.3.0"
+authors = [
+    {name = "Aaron"},
+    {name = "Sun"},
+]
+description = "Stream sampling python"
+readme = {file = "README.md", content-type = "text/markdown"}
+license = {file = "LICENSE"}
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "juliacall>=0.9.28",  # depends on juliapkg.
+    # Julia dependencies are managed by juliapkg and added to `juliapkg.json`
+]
+
+[project.optional-dependencies]
+test = [ "pytest" ]
+
+[tool.hatch.build.targets.sdist.force-include]
+"src/mcstas_sampling/juliapkg.json" = "src/mcstas_sampling/juliapkg.json" 
+
+[tool.hatch.build.targets.sdist]
+include = ["src/*"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/mcstas_sampling/juliapkg.json" = "src/mcstas_sampling/juliapkg.json" 
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcstas_sampling"]
+
